@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""comic-generator 的回歸測試（跨平台，Pillow）。
+"""comic 的回歸測試（跨平台，Pillow）。
 
 取代 test_captions.ps1。涵蓋與舊版相同的項目：
 標準化、五種泡型、自動縮字、預設只排文字、--draw-bubbles 退路、

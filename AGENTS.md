@@ -1,12 +1,12 @@
-# teaching-comic（專案藍圖）
+# teach-comic（專案藍圖）
 
 > 本檔為跨 Agent 通用的專案藍圖（AGENTS.md 開放標準）。任何 Agent 的每個 session 都應先讀本檔＋`handoff.md`。
 
 ## 專案簡介
 
-製作教學用漫畫。核心是 `comic-generator` Skill：使用者提供教材路徑或內容後，引導選擇漫畫風格，再把教材重點轉為直式 4:5、2×2 的四格漫畫。工作流固定保留 `raw → normalized → final` 三個階段，並透過 JSON 配置中文對話框。
+製作教學用漫畫。核心是 `comic` Skill：使用者提供教材路徑或內容後，引導選擇漫畫風格，再把教材重點轉為直式 4:5、2×2 的四格漫畫。工作流固定保留 `raw → normalized → final` 三個階段，並透過 JSON 配置中文對話框。
 
-被 `teaching-web` 專案固定調用來產生課前暖身漫畫。
+被 `teach-math-web` 專案固定調用來產生課前暖身漫畫。
 
 ## 關鍵時程
 
@@ -14,7 +14,7 @@
 
 ## 目標與路線圖
 
-- [x] 階段一：`comic-generator` Skill 與 `raw → normalized → final` 三階段工作流成形
+- [x] 階段一：`comic` Skill 與 `raw → normalized → final` 三階段工作流成形
 - [x] 階段二：規則整合為跨 Agent `AGENTS.md`，移除舊規則檔並同步 README
 - [x] 階段三：修掉「框中框」問題——`add_captions_json.ps1` 新增 `-TextOnly`、`draw_bubble`、`text_color` 三個能力
 - [x] 階段四：畫風規則改為不限定（由使用者指定，或臨場依教材主題提 4-6 個選項）
@@ -28,7 +28,7 @@
 ## 資料夾結構
 
 ```
-teaching-comic/
+teach-comic/
 ├─ skills/comic-generator/           # 核心 Skill（自足，可整包安裝到全域技能目錄）
 │  ├─ SKILL.md                       # 使用前必須完整閱讀
 │  ├─ scripts/                       # 後製腳本（Python + Pillow，跨平台）
@@ -45,8 +45,8 @@ teaching-comic/
 | 層級 | 平台 | 位置 | 讀取時機 |
 |------|------|------|---------|
 | L1 | 本地（GDrive） | `AGENTS.md`＋`handoff.md` | 每個 session |
-| L2 | GitHub | https://github.com/changyiwu/teaching-comic （公開，預設分支 `main`） | 指定時 |
-| L3 | Obsidian | `teaching-comic/專案工作流程.md` | 有需要時 |
+| L2 | GitHub | https://github.com/changyiwu/teach-comic （公開，預設分支 `main`） | 指定時 |
+| L3 | Obsidian | `teach-comic/專案工作流程.md` | 有需要時 |
 
 ## 三個檔案的職責（依「時效性」分家，不是依「詳細程度」）
 
@@ -66,9 +66,9 @@ teaching-comic/
 - 修改共用檔案前先讀最新內容，避免覆蓋其他 Agent 的變更
 - 所有回應與文件使用繁體中文；涉及檔案操作時回報完整產出位置
 - PowerShell 一律 pwsh 7；**Windows 與 macOS 皆支援**，組路徑一律 `Join-Path` ＋ 正斜線，不要把變數直接接上反斜線（mac 上 `Test-Path` 會靜默回 `False`）
-- 使用 `comic-generator` 前必須先完整閱讀 `skills/comic-generator/SKILL.md`
+- 使用 `comic` 前必須先完整閱讀 `skills/comic-generator/SKILL.md`
 - 修改圖片標準化或對話框程式後，執行 `skills/comic-generator/tests/test_captions.py`（用 `file-toolkit` 共用環境的 python）
-- 腳本只改本專案的原始檔，改完跑測試再用 `sync-skills` 同步；不要直接編輯全域技能副本
+- 腳本只改本專案的原始檔，改完跑測試再用 `skill-sync` 同步；不要直接編輯全域技能副本
 - **原始生圖不可被後製腳本覆寫**；衍生檔案使用 `_normalized` 與 `_final` 後綴
 - 收工時更新 Obsidian 專案筆記，檢查 diff，且只提交本次任務相關檔案
 - 不把每日流水帳寫進本檔

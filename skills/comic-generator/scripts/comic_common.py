@@ -1,4 +1,4 @@
-"""comic-generator 的共用繪圖工具（Pillow，跨平台）。
+"""comic 的共用繪圖工具（Pillow，跨平台）。
 
 取代原本的 System.Drawing（GDI+）。GDI+ 自 .NET 6 起只支援 Windows——
 `System.Drawing.Common` 的組件層級帶著 SupportedOSPlatform("windows6.1")，

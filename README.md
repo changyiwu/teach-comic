@@ -1,4 +1,4 @@
-# teaching-comic
+# teach-comic
 
 將教材重點轉換成適合電腦與手機閱讀的教學四格漫畫。
 
@@ -75,7 +75,7 @@ $PY = & (Join-Path $HOME '.claude/skills/file-toolkit/scripts/ensure_env.ps1') |
 & $PY "skills/comic-generator/tests/test_captions.py"
 ```
 
-在其他專案使用時，把上面的 `skills/comic-generator` 換成該 Agent 的全域技能路徑（例如 `~/.claude/skills/comic-generator`）。
+在其他專案使用時，把上面的 `skills/comic-generator` 換成該 Agent 的全域技能路徑（例如 `~/.claude/skills/comic`）。
 
 ## 平台支援
 

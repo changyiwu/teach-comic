@@ -1,5 +1,5 @@
 ---
-name: comic-generator
+name: comic
 description: >
   教材四格漫畫生成技能。當使用者提供教材檔案或教材文字時，整理 1 到 5 個核心重點，
   為每個重點生成一張直式 4:5、2x2 四格漫畫，對話泡由生圖階段畫出，再依 JSON 設定把中文排進泡裡。
@@ -85,13 +85,13 @@ description: >
 $PY = & (Join-Path $HOME '.claude/skills/file-toolkit/scripts/ensure_env.ps1') | Select-Object -Last 1
 $candidates = @(
   (Join-Path (Get-Location).Path 'skills/comic-generator')
-  (Join-Path $HOME '.claude/skills/comic-generator')
-  (Join-Path $HOME '.agents/skills/comic-generator')
-  (Join-Path $HOME '.config/opencode/skills/comic-generator')
-  (Join-Path $HOME '.gemini/config/skills/comic-generator')
+  (Join-Path $HOME '.claude/skills/comic')
+  (Join-Path $HOME '.agents/skills/comic')
+  (Join-Path $HOME '.config/opencode/skills/comic')
+  (Join-Path $HOME '.gemini/config/skills/comic')
 )
 $skillDir = $candidates | Where-Object { Test-Path (Join-Path $_ 'scripts/normalize_comic.py') } | Select-Object -First 1
-if (-not $skillDir) { throw '找不到 comic-generator 的 scripts 目錄' }
+if (-not $skillDir) { throw '找不到 comic 的 scripts 目錄' }
 "Python：$PY"
 "技能目錄：$skillDir"
 ```
@@ -241,6 +241,6 @@ if (-not $skillDir) { throw '找不到 comic-generator 的 scripts 目錄' }
 & <PY> "<SKILL_DIR>/tests/test_captions.py"
 ```
 
-程式只該在 `teaching-comic` 專案的原始檔改，改完跑測試，再用 `sync-skills` 同步到各 Agent 的全域技能目錄；不要直接編輯全域副本。
+程式只該在 `teach-comic` 專案的原始檔改，改完跑測試，再用 `skill-sync` 同步到各 Agent 的全域技能目錄；不要直接編輯全域副本。
 
 測試涵蓋：4:5 標準化、五種對話框、長文字自動縮放、預設不繪框、`-DrawBubbles` 退路、JSON 驗證、禁止覆寫原圖、黑色區塊回歸及暫存檔清理。
