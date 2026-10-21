@@ -18,7 +18,7 @@
 - [x] 階段二：規則整合為跨 Agent `AGENTS.md`，移除舊規則檔並同步 README
 - [x] 階段三：修掉「框中框」問題——`add_captions_json.ps1` 新增 `-TextOnly`、`draw_bubble`、`text_color` 三個能力
 - [x] 階段四：畫風規則改為不限定（由使用者指定，或臨場依教材主題提 4-6 個選項）
-- [x] 階段五：技能自足化——`scripts/`、`tests/` 移入 `skills/comic-generator/`，並安裝到四個 Agent 的全域技能目錄
+- [x] 階段五：技能自足化——`scripts/`、`tests/` 移入 `skills/comic/`，並安裝到四個 Agent 的全域技能目錄
 - [ ] 階段六：以更新後的 JSON 重跑 `1-1-2` 的 `_final.png`
 - [ ] 階段七：確認生圖品質等級（目前疑為 `claude-draw` 預設 `low`），評估是否整批改用 `medium`
 - [ ] 階段八：繼續以教材內容驗證四格漫畫工作流
@@ -29,7 +29,7 @@
 
 ```
 teach-comic/
-├─ skills/comic-generator/           # 核心 Skill（自足，可整包安裝到全域技能目錄）
+├─ skills/comic/           # 核心 Skill（自足，可整包安裝到全域技能目錄）
 │  ├─ SKILL.md                       # 使用前必須完整閱讀
 │  ├─ scripts/                       # 後製腳本（Python + Pillow，跨平台）
 │  └─ tests/test_captions.py         # 對話框回歸測試
@@ -66,8 +66,8 @@ teach-comic/
 - 修改共用檔案前先讀最新內容，避免覆蓋其他 Agent 的變更
 - 所有回應與文件使用繁體中文；涉及檔案操作時回報完整產出位置
 - PowerShell 一律 pwsh 7；**Windows 與 macOS 皆支援**，組路徑一律 `Join-Path` ＋ 正斜線，不要把變數直接接上反斜線（mac 上 `Test-Path` 會靜默回 `False`）
-- 使用 `comic` 前必須先完整閱讀 `skills/comic-generator/SKILL.md`
-- 修改圖片標準化或對話框程式後，執行 `skills/comic-generator/tests/test_captions.py`（用 `file-toolkit` 共用環境的 python）
+- 使用 `comic` 前必須先完整閱讀 `skills/comic/SKILL.md`
+- 修改圖片標準化或對話框程式後，執行 `skills/comic/tests/test_captions.py`（用 `file-toolkit` 共用環境的 python）
 - 腳本只改本專案的原始檔，改完跑測試再用 `skill-sync` 同步；不要直接編輯全域技能副本
 - **原始生圖不可被後製腳本覆寫**；衍生檔案使用 `_normalized` 與 `_final` 後綴
 - 收工時更新 Obsidian 專案筆記，檢查 diff，且只提交本次任務相關檔案

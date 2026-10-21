@@ -84,7 +84,7 @@ description: >
 ```powershell
 $PY = & (Join-Path $HOME '.claude/skills/file-toolkit/scripts/ensure_env.ps1') | Select-Object -Last 1
 $candidates = @(
-  (Join-Path (Get-Location).Path 'skills/comic-generator')
+  (Join-Path (Get-Location).Path 'skills/comic')
   (Join-Path $HOME '.claude/skills/comic')
   (Join-Path $HOME '.agents/skills/comic')
   (Join-Path $HOME '.config/opencode/skills/comic')

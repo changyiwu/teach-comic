@@ -22,12 +22,12 @@
 ## 目錄結構
 
 - `AGENTS.md`：跨 Agent 專案規範與工作守則。
-- `skills/comic-generator/SKILL.md`：教材四格漫畫生成工作流。
-- `skills/comic-generator/scripts/normalize_comic.py`：將圖片標準化為 4:5、1080×1350。
-- `skills/comic-generator/scripts/add_captions_json.py`：驗證 JSON 並加入多個中文對話框。
-- `skills/comic-generator/scripts/comic_common.py`：字型解析、中文折行、泡型幾何（兩支腳本共用）。
-- `skills/comic-generator/tests/test_captions.py`：自動測試標準化、文字後製及安全檢查。
-- `skills/comic-generator/tests/fixtures/bubbles.json`：涵蓋五種對話框的測試設定。
+- `skills/comic/SKILL.md`：教材四格漫畫生成工作流。
+- `skills/comic/scripts/normalize_comic.py`：將圖片標準化為 4:5、1080×1350。
+- `skills/comic/scripts/add_captions_json.py`：驗證 JSON 並加入多個中文對話框。
+- `skills/comic/scripts/comic_common.py`：字型解析、中文折行、泡型幾何（兩支腳本共用）。
+- `skills/comic/tests/test_captions.py`：自動測試標準化、文字後製及安全檢查。
+- `skills/comic/tests/fixtures/bubbles.json`：涵蓋五種對話框的測試設定。
 - `output/`：漫畫成品目錄，不納入 Git。
 
 腳本與測試放在技能資料夾內，技能複製到各 Agent 的全域技能目錄後即可獨立運作。
@@ -55,7 +55,7 @@ $PY = & (Join-Path $HOME '.claude/skills/file-toolkit/scripts/ensure_env.ps1') |
 先標準化原圖：
 
 ```powershell
-& $PY "skills/comic-generator/scripts/normalize_comic.py" `
+& $PY "skills/comic/scripts/normalize_comic.py" `
   --image-path "output/comic_point_1_raw.png" `
   --output-path "output/comic_point_1_normalized.png"
 ```
@@ -63,7 +63,7 @@ $PY = & (Join-Path $HOME '.claude/skills/file-toolkit/scripts/ensure_env.ps1') |
 再加入對話框：
 
 ```powershell
-& $PY "skills/comic-generator/scripts/add_captions_json.py" `
+& $PY "skills/comic/scripts/add_captions_json.py" `
   --image-path "output/comic_point_1_normalized.png" `
   --output-path "output/comic_point_1_final.png" `
   --json-path "output/comic_point_1_bubbles.json"
@@ -72,10 +72,10 @@ $PY = & (Join-Path $HOME '.claude/skills/file-toolkit/scripts/ensure_env.ps1') |
 執行自動測試：
 
 ```powershell
-& $PY "skills/comic-generator/tests/test_captions.py"
+& $PY "skills/comic/tests/test_captions.py"
 ```
 
-在其他專案使用時，把上面的 `skills/comic-generator` 換成該 Agent 的全域技能路徑（例如 `~/.claude/skills/comic`）。
+在其他專案使用時，把上面的 `skills/comic` 換成該 Agent 的全域技能路徑（例如 `~/.claude/skills/comic`）。
 
 ## 平台支援
 
